@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { lougout } from '../Redux/Actions/userActions'
 
 function Header() {
-    const {userInfo} = useSelector(state => state.loginDetails)
+    const {user} = useSelector(state => state.loginDetails)
     const dispatch = useDispatch()
     const handleLougOut=()=>{
         dispatch(lougout())
@@ -22,8 +22,8 @@ function Header() {
                 <LinkContainer to='/'>
                     <Nav.Link >Home</Nav.Link>
                 </LinkContainer>
-                {userInfo ? 
-                <LinkContainer to={`/profile/${userInfo.userId}`}>
+                {user ? 
+                <LinkContainer to={`/profile/${user.userId}`}>
                 <Nav.Link >Profile</Nav.Link>
                 </LinkContainer>
                 
@@ -33,7 +33,7 @@ function Header() {
                 </LinkContainer>
             }
 
-{              userInfo ? 
+{              user ? 
                 <Nav.Link ><button onClick={handleLougOut}>Log out</button></Nav.Link>
 
                 :

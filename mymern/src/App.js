@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Login from './Screens/Login';
 import SignIn from './Screens/SignIn';
+import Profile from './Screens/Profile';
 function App() {
   return (
     <div className="App">
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignIn/>} />
+        <Route path="/profile/:id" element={<Profile/>} />
       </Routes>
       
     </div>

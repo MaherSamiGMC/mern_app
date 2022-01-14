@@ -15,7 +15,7 @@ const addNewUser=async(req,res)=>{
             const hashed=await bcrypt.hash(password,saltRounds)
             const newUser=new users({...req.body,password:hashed})
             await newUser.save()
-            return res.json({message:'user added successfully'})
+            return res.status(200).json({message:'user added successfully'})
         }
     } catch (error) {
         return res.status(400).json({message:error})
@@ -34,7 +34,7 @@ const getUsers=async(req,res)=>{
 
 const getUser=async(req,res)=>{
     try {
-        const user=await users.findById(req.params.id)
+        const user=await users.findById(req.params.id).populate("listOfProducts").select("-password")
         return res.json({message:'user found successfully',user})
     } catch (error) {
         return res.json({message:error})

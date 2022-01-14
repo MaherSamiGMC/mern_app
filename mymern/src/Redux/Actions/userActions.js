@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ADD_NEW_USER_FAIL, ADD_NEW_USER_REQUEST, ADD_NEW_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOUGOUT } from "../constants/userConstants"
+import { ADD_NEW_USER_FAIL, ADD_NEW_USER_REQUEST, ADD_NEW_USER_SUCCESS, GET_USER_DETAILS_FAIL, GET_USER_DETAILS_REQUEST, GET_USER_DETAILS_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOUGOUT } from "../constants/userConstants"
 
 
 export const addNewUser=(newUser)=>async(dispatch)=>{
@@ -28,4 +28,15 @@ export const login=(userCred)=>async(dispatch)=>{
 export const lougout=()=>(dispatch)=>{
     dispatch({type:LOUGOUT})
     localStorage.removeItem('cred')
+}
+
+export const getUserDetails=(id)=>async(dispatch)=>{
+    try {
+        dispatch({type:GET_USER_DETAILS_REQUEST})
+        const {data}=await axios.get(`http://localhost:4000/userAPI/${id}`)
+        dispatch({type:GET_USER_DETAILS_SUCCESS,payload:data})
+
+    } catch (error) {
+        dispatch({type:GET_USER_DETAILS_FAIL})
+    }
 }
